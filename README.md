@@ -1,6 +1,14 @@
-# Kanap #
+Hi,
 
-This is the front end and back end server for Project 5 of the Web Developer path.
+This is the fourth project that i did as part of my training to become web developer. The project was about learning and using JavaScript.
+
+If you watch it, first of all thank you ! And feel free to contact me about some part of the code ;)
+
+I wish you a nice day or evening,
+
+Thibault
+
+
 
 ### Back end Prerequisites ###
 
