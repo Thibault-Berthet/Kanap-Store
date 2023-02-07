@@ -3,6 +3,9 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
 // URLSearchParams est fourni par JS
 
+const boutonPanier = document.querySelector('#addToCart')
+console.log(boutonPanier)
+
 // Variable en camelCase
 // Class en PascalCase
 
@@ -17,7 +20,7 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 // console.log(params.id);
 
 // Requete à l'adresse indiqué dans le fetch
-fetch(`http://localhost:3000/api/products/${urlSearchParams.get("id")}`)
+fetch(`http://localhost:3000/api/products/${urlSearchParams.get('id')}`)
 
 // Attend la réponse du JSON ? Le response correspond à une réponse ?
     .then((response) => response.json())
@@ -28,11 +31,11 @@ fetch(`http://localhost:3000/api/products/${urlSearchParams.get("id")}`)
 
     .then(canap => {
 
-        document.querySelector(".item__img").innerHTML = `<img src="${canap.imageUrl}" alt="${canap.altTxt}">`;
+        document.querySelector('.item__img').innerHTML = `<img src="${canap.imageUrl}" alt="${canap.altTxt}">`;
 
-        document.getElementById("title").innerHTML = canap.name;
-        document.getElementById("price").innerHTML = canap.price;
-        document.getElementById("description").innerHTML = canap.description;
+        document.getElementById('title').innerHTML = canap.name;
+        document.getElementById('price').innerHTML = canap.price;
+        document.getElementById('description').innerHTML = canap.description;
 
         // let options = "";
 
@@ -47,12 +50,27 @@ fetch(`http://localhost:3000/api/products/${urlSearchParams.get("id")}`)
 
     })
 
-document.addEventListener("click", () => {
-    console.log('test');
+
+
+
+boutonPanier.addEventListener('click', () => {
+    console.log('test-du-click')
     // localStorage.clear()
 
-    let objCanap = [`${urlSearchParams.get('id')}`, document.getElementsByTagName('color-select'), document.getElementsByTagName('itemQuantity')]
+    // let objCanap = [`${urlSearchParams.get('id')}`, document.getElementsByClassName('color-select'), document.getElementsByClassName('itemQuantity')]
 
-    let donneeCanap = JSON.stringify(objCanap)
-    localStorage.setItem('obj',donneeCanap)
+    // let donneeCanap = JSON.stringify(objCanap)
+
+    let idCanap = urlSearchParams.get('id')
+    console.log(idCanap)
+
+    let colorCanap = document.querySelector('#colors').value
+    console.log(colorCanap)
+
+    let nberCanap = document.querySelector('#quantity').value
+    console.log(nberCanap)
+
+    localStorage.setItem('id-Canap',idCanap)
+    localStorage.setItem('color-Canap',colorCanap)
+    localStorage.setItem('nber-Canap',nberCanap)
 })
