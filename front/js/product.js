@@ -1,10 +1,4 @@
-/* ------------ JavaScript des produits ------------ */
-
-const urlSearchParams = new URLSearchParams(window.location.search);
-// URLSearchParams est fourni par JS
-
-const boutonPanier = document.querySelector('#addToCart')
-console.log(boutonPanier)
+/* ------------ Commentaires et tentatives de code ------------ */
 
 // Variable en camelCase
 // Class en PascalCase
@@ -13,21 +7,31 @@ console.log(boutonPanier)
 // Window.location c'est la barre de recherche
 // Window.location.search c'est l'entierete de l'URL
 
-// console.log(urlSearchParams.get("id"));
-
 // const params = Object.fromEntries(urlSearchParams.entries()); ==> Alternative à urlSearchParams.get("id") en remplaçant tout ça par une constante params
-
 // console.log(params.id);
 
-// Requete à l'adresse indiqué dans le fetch
+// ------ Boucle pour la selection des couleurs ------
+// let options = "";
+        // for (let i = 0; i < canap.colors.length; i++){
+        //     // document.getElementById("colors").innerHTML = 
+        //     // += garde la valeur précédente et ajoute la suivante dedans
+        //     options += `<option value="${canap.colors[i]}">-- ${canap.colors[i]} --</option>`;
+        // }
+
+// ------ Tentative pour récupérer les elements et les stocker dans le localStorage ------
+    // let objCanap = [`${urlSearchParams.get('id')}`, document.getElementsByClassName('color-select'), document.getElementsByClassName('itemQuantity')]
+    // let donneeCanap = JSON.stringify(objCanap)
+
+
+/* ------------ JavaScript des produits ------------ */
+
+const urlSearchParams = new URLSearchParams(window.location.search);
+// URLSearchParams est fourni par JS
+
+
 fetch(`http://localhost:3000/api/products/${urlSearchParams.get('id')}`)
 
-// Attend la réponse du JSON ? Le response correspond à une réponse ?
     .then((response) => response.json())
-
-    // .then(data => data.map(imageC =>
-    //     `<img src="${imageC.imageUrl}" alt="${imageC.altTxt}">`
-    //     ))
 
     .then(canap => {
 
@@ -37,29 +41,17 @@ fetch(`http://localhost:3000/api/products/${urlSearchParams.get('id')}`)
         document.getElementById('price').innerHTML = canap.price;
         document.getElementById('description').innerHTML = canap.description;
 
-        // let options = "";
-
-        // for (let i = 0; i < canap.colors.length; i++){
-        //     // document.getElementById("colors").innerHTML = 
-        //     // += garde la valeur précédente et ajoute la suivante dedans
-        //     options += `<option value="${canap.colors[i]}">-- ${canap.colors[i]} --</option>`;
-        // }
-
         document.getElementById("colors").innerHTML = canap.colors.map( color => `<option value="${color}">-- ${color} --</option>` ).join('');
         // Fait la meme chose que la boucle for
-
     })
 
 
-
+const boutonPanier = document.querySelector('#addToCart')
+console.log(boutonPanier)
 
 boutonPanier.addEventListener('click', () => {
     console.log('test-du-click')
     // localStorage.clear()
-
-    // let objCanap = [`${urlSearchParams.get('id')}`, document.getElementsByClassName('color-select'), document.getElementsByClassName('itemQuantity')]
-
-    // let donneeCanap = JSON.stringify(objCanap)
 
     let idCanap = urlSearchParams.get('id')
     console.log(idCanap)
