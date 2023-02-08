@@ -48,32 +48,61 @@ fetch(`http://localhost:3000/api/products/${urlSearchParams.get('id')}`)
 const boutonPanier = document.querySelector('#addToCart')
 
 boutonPanier.addEventListener('click', () => {
-    console.log('test-du-click')
+
     // localStorage.clear()
 
-    let idCanap = urlSearchParams.get('id')
+    let id = urlSearchParams.get('id')
 
-    let colorCanap = document.querySelector('#colors').value
+    let color = document.querySelector('#colors').value
 
-    let nberCanap = document.querySelector('#quantity').value
+    let nber = parseInt(document.querySelector('#quantity').value)
 
-    let choixCanap = [idCanap,colorCanap,nberCanap] // Tableau des choix qui vont aller dans le panier
+    let choixCanap = {id,color,nber} // Tableau des choix qui vont aller dans le panier
+                                                    // Si les clés ont le meme nom que la variable pas besoin de les déclaré
+    let cart = localStorage.getItem('choix-canap')
+
     console.log(choixCanap)
 
-    if (localStorage.getItem('choix-canap') === null) {         // Si il n'y a rien dans le local storage on stock une première fois
-        let choixCanapStringi = JSON.stringify(choixCanap)      // Transforme le tableau en chaine de carac
-        localStorage.setItem('choix-canap',choixCanapStringi)   // Stock dans le local storage
+    if (cart === null) {   
+        cart = []   
     }
-    else if (localStorage.getItem('choix-canap') !== null ){    // Si il y a qqchose dans le local
+    else{
+        cart = JSON.parse(cart)
+    }
+    console.log(cart.length)
+
+    let index = cart.findIndex( (product) => product.color ===  color && product.id === id)
+
+    console.log(index)
+
+    if (index >= 0){
+        cart[index].nber += nber
+    }
+    else{
+        cart.push(choixCanap)
+    }
+    console.log(cart)
+
+        // for (let i = 0; i < choixCanapUnStringi.length; i+= 3) {
+            
+        //     if ( (choixCanapUnStringi[i] === choixCanap[i]) && (choixCanapUnStringi[i+1] === choixCanap[i+1]) ) {
+        //         choixCanapUnStringi[i+2].value += choixCanap[i+2]
+        //     }
+        //     else{
+        //         choixCanapUnStringi = choixCanapUnStringi.concat(choixCanap)
+        //         break
+        //     }
+        // }
         
-        choixCanapStringi = localStorage.getItem('choix-canap') // On récupère le local storage
-        let choixCanapUnStringi = JSON.parse(choixCanapStringi) // On le transforme en tableau
-        console.log(choixCanapUnStringi)
+        cart = JSON.stringify(cart)
+        localStorage.setItem('choix-canap',cart)
 
+        // console.log(choixCanapUnStringi[0])
+        // console.log(choixCanap[0])
 
-    }
+        // console.log(choixCanapUnStringi[1])
+        // console.log(choixCanap[1])
 
-    // localStorage.setItem('id-Canap',idCanap)
-    // localStorage.setItem('color-Canap',colorCanap)
-    // localStorage.setItem('nber-Canap',nberCanap)
+        // console.log(choixCanapUnStringi[2])
+        // console.log(choixCanap[2])
 })
