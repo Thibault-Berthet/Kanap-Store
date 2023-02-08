@@ -28,7 +28,6 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
 // URLSearchParams est fourni par JS
 
-
 fetch(`http://localhost:3000/api/products/${urlSearchParams.get('id')}`)
 
     .then((response) => response.json())
@@ -47,22 +46,34 @@ fetch(`http://localhost:3000/api/products/${urlSearchParams.get('id')}`)
 
 
 const boutonPanier = document.querySelector('#addToCart')
-console.log(boutonPanier)
 
 boutonPanier.addEventListener('click', () => {
     console.log('test-du-click')
     // localStorage.clear()
 
     let idCanap = urlSearchParams.get('id')
-    console.log(idCanap)
 
     let colorCanap = document.querySelector('#colors').value
-    console.log(colorCanap)
 
     let nberCanap = document.querySelector('#quantity').value
-    console.log(nberCanap)
 
-    localStorage.setItem('id-Canap',idCanap)
-    localStorage.setItem('color-Canap',colorCanap)
-    localStorage.setItem('nber-Canap',nberCanap)
+    let choixCanap = [idCanap,colorCanap,nberCanap] // Tableau des choix qui vont aller dans le panier
+    console.log(choixCanap)
+
+    if (localStorage.getItem('choix-canap') === null) {         // Si il n'y a rien dans le local storage on stock une première fois
+        let choixCanapStringi = JSON.stringify(choixCanap)      // Transforme le tableau en chaine de carac
+        localStorage.setItem('choix-canap',choixCanapStringi)   // Stock dans le local storage
+    }
+    else if (localStorage.getItem('choix-canap') !== null ){    // Si il y a qqchose dans le local
+        
+        choixCanapStringi = localStorage.getItem('choix-canap') // On récupère le local storage
+        let choixCanapUnStringi = JSON.parse(choixCanapStringi) // On le transforme en tableau
+        console.log(choixCanapUnStringi)
+
+
+    }
+
+    // localStorage.setItem('id-Canap',idCanap)
+    // localStorage.setItem('color-Canap',colorCanap)
+    // localStorage.setItem('nber-Canap',nberCanap)
 })
