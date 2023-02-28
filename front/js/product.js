@@ -22,6 +22,16 @@
     // let objCanap = [`${urlSearchParams.get('id')}`, document.getElementsByClassName('color-select'), document.getElementsByClassName('itemQuantity')]
     // let donneeCanap = JSON.stringify(objCanap)
 
+    // for (let i = 0; i < choixCanapUnStringi.length; i+= 3) {
+        //     if ( (choixCanapUnStringi[i] === choixCanap[i]) && (choixCanapUnStringi[i+1] === choixCanap[i+1]) ) {
+        //         choixCanapUnStringi[i+2].value += choixCanap[i+2]
+        //     }
+        //     else{
+        //         choixCanapUnStringi = choixCanapUnStringi.concat(choixCanap)
+        //         break
+        //     }
+        // }
+    // récuperation avec un tableau uniquement et non un tableau d'objet
 
 /* ------------ JavaScript des produits ------------ */
 
@@ -45,11 +55,9 @@ fetch(`http://localhost:3000/api/products/${urlSearchParams.get('id')}`)
     })
 
 
-const boutonPanier = document.querySelector('#addToCart')
+const panier = document.querySelector('#addToCart')
 
-boutonPanier.addEventListener('click', () => {
-
-    // localStorage.clear()
+panier.addEventListener('click', () => {
 
     let id = urlSearchParams.get('id')
 
@@ -57,8 +65,9 @@ boutonPanier.addEventListener('click', () => {
 
     let nber = parseInt(document.querySelector('#quantity').value)
 
-    let choixCanap = {id,color,nber} // Tableau des choix qui vont aller dans le panier
-                                                    // Si les clés ont le meme nom que la variable pas besoin de les déclaré
+    let choixCanap = {id,color,nber}
+    // Tableau des choix qui vont aller dans le panier
+    // Si les clés ont le meme nom que la variable pas besoin de les déclaré
     let cart = localStorage.getItem('choix-canap')
 
     console.log(choixCanap)
@@ -66,43 +75,23 @@ boutonPanier.addEventListener('click', () => {
     if (cart === null) {   
         cart = []   
     }
-    else{
+    else {
         cart = JSON.parse(cart)
     }
     console.log(cart.length)
 
-    let index = cart.findIndex( (product) => product.color ===  color && product.id === id)
+    let index = cart.findIndex((product) => product.color ===  color && product.id === id)
 
     console.log(index)
 
-    if (index >= 0){
+    if (index >= 0) {
         cart[index].nber += nber
     }
-    else{
+    else {
         cart.push(choixCanap)
     }
     console.log(cart)
 
-        // for (let i = 0; i < choixCanapUnStringi.length; i+= 3) {
-            
-        //     if ( (choixCanapUnStringi[i] === choixCanap[i]) && (choixCanapUnStringi[i+1] === choixCanap[i+1]) ) {
-        //         choixCanapUnStringi[i+2].value += choixCanap[i+2]
-        //     }
-        //     else{
-        //         choixCanapUnStringi = choixCanapUnStringi.concat(choixCanap)
-        //         break
-        //     }
-        // }
-        
-        cart = JSON.stringify(cart)
-        localStorage.setItem('choix-canap',cart)
-
-        // console.log(choixCanapUnStringi[0])
-        // console.log(choixCanap[0])
-
-        // console.log(choixCanapUnStringi[1])
-        // console.log(choixCanap[1])
-
-        // console.log(choixCanapUnStringi[2])
-        // console.log(choixCanap[2])
+    cart = JSON.stringify(cart)
+    localStorage.setItem('choix-canap',cart)
 })
