@@ -159,6 +159,7 @@ const validate = document.querySelector('#order')
 
 validate.addEventListener('click', (event) => {
     event.preventDefault()
+    // Désactive le comportement par défaut du navigateur
 
     const contact = {
         firstName: document.querySelector('#firstName').value,
@@ -168,7 +169,7 @@ validate.addEventListener('click', (event) => {
         email: document.querySelector('#email').value,
     }
     // console.log(contact)
-    if ( firstName(contact) && lastName(contact) && address(contact) && city(contact) && email(contact)) {
+    if (firstName(contact.firstName) && lastName(contact.lastName) && address(contact.address) && city(contact.city) && email(contact.email)) {
         contactInfos = JSON.stringify(contact)
         localStorage.setItem('contact', contactInfos)
 
@@ -183,75 +184,65 @@ validate.addEventListener('click', (event) => {
 // Vérification des données entrées dans les formulaires
 
 // Vérification du prénom
-function firstName (contact) {
-    const firstN = contact.firstName
-    if (firstN.match(/^[A-Z][A-Za-z\ç\é\è\ê\î\ï\ô\ù\-]+$/)) {
+function firstName (firstName) {
+    // const firstN = contact.firstName
+    if (firstName.match(/^[A-Z][A-Za-z\ç\é\è\ê\î\ï\ô\ù\-]+$/)) {
         document.querySelector('#firstNameErrorMsg').textContent = ''
         return true
     }
-    else {
         document.querySelector('#firstNameErrorMsg').textContent = "Le format du prénom n'est pas bon, veuillez corriger svp, ex : Jérôme"
         return false
-    }
 }
 
 // Vérification du nom de famille
-function lastName (contact) {
-    const lastN = contact.lastName
-    if (lastN.match(/^[A-Z][A-Za-z\ç\é\è\ê\î\ï\ô\ù\s\'\-]+$/)) {
+function lastName (lastName) {
+    // const lastN = contact.lastName
+    if (lastName.match(/^[A-Z][A-Za-z\ç\é\è\ê\î\ï\ô\ù\s\'\-]+$/)) {
         document.querySelector('#lastNameErrorMsg').textContent = ''
         return true
     }
-    else {
         document.querySelector('#lastNameErrorMsg').textContent = "Le format du nom de famille n'est pas bon, veuillez corriger svp, ex : De Labarre"
         return false
-    }
 }
 
 // Vérification de l'adresse
-function address (contact) {
-    const addressN = contact.address
-    if (addressN.match(/^[A-Za-z0-9\ç\é\è\ê\î\ï\ô\ù\s\'\-]+$/)) {
+function address (address) {
+    // const addressN = contact.address
+    if (address.match(/^[A-Za-z0-9\ç\é\è\ê\î\ï\ô\ù\s\'\-]+$/)) {
         document.querySelector('#addressErrorMsg').textContent = ''
         return true
     }
-    else {
         document.querySelector('#addressErrorMsg').textContent = "Le format de l'adresse n'est pas bon, veuillez corriger svp, ex : 3 Impasse des Cerisiers"
         return false
-    }
 }
 
 // Vérification de la ville
-function city (contact) {
-    const cityN = contact.city
-    if (cityN.match(/^[A-Z][A-Za-z\ç\é\è\ê\î\ï\ô\ù\s\'\-]+$/)) {
+function city (city) {
+    // const cityN = contact.city
+    if (city.match(/^[A-Z][A-Za-z\ç\é\è\ê\î\ï\ô\ù\s\'\-]+$/)) {
         document.querySelector('#cityErrorMsg').textContent = ''
         return true
     }
-    else {
         document.querySelector('#cityErrorMsg').textContent = "Le format de la ville n'est pas bon, veuillez corriger svp, ex : Grenoble"
         return false
-    }
 }
 
 // Vérification du mail
-function email (contact) {
-    const emailN = contact.email
-    if (emailN.match(/^[_a-z0-9-.]+@[a-z0-9-]+.[a-z0-9-]+$/)) {
+function email (email) {
+    // const emailN = contact.email
+    if (email.match(/^[_a-z0-9-.]+@[a-z0-9-]+.[a-z0-9-]+$/)) {
         document.querySelector('#emailErrorMsg').textContent = ''
         return true
     }
-    else {
         document.querySelector('#emailErrorMsg').textContent = "Le format du mail n'est pas bon, veuillez corriger svp, ex : jerome.de-labarre@gmail.com"
         return false
-    }
 }
 
 // Envoie vers le serveur
 function sendToServer (contact, products) {
     fetch('http://localhost:3000/api/products/order', {
         method : 'POST',
-        body: JSON.stringify({ contact, products}),
+        body: JSON.stringify({contact, products}),
         headers: {
           "Content-Type": "application/json",
         }
@@ -259,10 +250,10 @@ function sendToServer (contact, products) {
     .then((response) => {
         return response.json()
     })
-    .then((server) => {
-        const orderId = server.orderId
+    .then(({orderId}) => {
+        // const {orderId} = server // Similaire à la ligne d'au dessus, on dit déstructurer un objet
         if (orderId) {
-            console.log(orderId)
+            // console.log(orderId)
             location.href = "confirmation.html?id=" + orderId
         }
     })

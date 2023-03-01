@@ -2,6 +2,6 @@
 
 const orderId = new URL(window.location.href).searchParams.get("id")
 
-console.log(orderId)
+// console.log(orderId)
 
 document.querySelector('#orderId').innerHTML = orderId

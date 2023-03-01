@@ -70,7 +70,7 @@ panier.addEventListener('click', () => {
     // Si les clés ont le meme nom que la variable pas besoin de les déclaré
     let cart = localStorage.getItem('choix-canap')
 
-    console.log(choixCanap)
+    // console.log(choixCanap)
 
     if (cart === null) {   
         cart = []   
@@ -78,11 +78,11 @@ panier.addEventListener('click', () => {
     else {
         cart = JSON.parse(cart)
     }
-    console.log(cart.length)
+    // console.log(cart.length)
 
     let index = cart.findIndex((product) => product.color ===  color && product.id === id)
 
-    console.log(index)
+    // console.log(index)
 
     if (index >= 0) {
         cart[index].nber += nber
@@ -90,7 +90,7 @@ panier.addEventListener('click', () => {
     else {
         cart.push(choixCanap)
     }
-    console.log(cart)
+    // console.log(cart)
 
     cart = JSON.stringify(cart)
     localStorage.setItem('choix-canap',cart)
