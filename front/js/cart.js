@@ -38,6 +38,7 @@ async function displayCart() {
                     <div class="cart__item__content__settings__quantity">
                         <p>Qté : </p>
                         <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${product.nber}">
+                        <p id="itemQuantityErrorMsg"></p>
                     </div>
                     <div class="cart__item__content__settings__delete">
                         <p class="deleteItem">Supprimer</p>
@@ -124,7 +125,16 @@ function changeQuantity () {
             let index = cart.findIndex((product) => product.color ===  color && product.id === id)
 
             // Modifie le nombre d'article
-            cart[index].nber = parseInt(inputValue)
+            cart[index].nber = parseFloat(inputValue)
+
+            // Vérifie que le nombre entré soit bien compris entre 1 et 100
+            if (cart[index].nber < 1 || cart[index].nber > 100 || !Number.isInteger(cart[index].nber)){
+                document.querySelector('#itemQuantityErrorMsg').textContent = '* Nombre entre 1 et 100 svp. *'
+                return false
+            }
+            else{
+                document.querySelector('#itemQuantityErrorMsg').textContent = ''
+            }
 
             // Met à jour le localStorage
             cart = JSON.stringify(cart)
@@ -153,6 +163,15 @@ validate.addEventListener('click', (event) => {
         email: document.querySelector('#email').value,
     }
 
+    // Vérification si le panier est vide
+    let cart = localStorage.getItem('choix-canap')
+    cart = JSON.parse(cart)
+    console.log(cart)
+    if(cart.length === 0){
+        alert("Commande impossible : il n'y a pas d'article dans votre panier !")
+        return false
+    }
+
     // Vérification des informations des formulaires, stockage dans le localStorage
     // et envoie vers le serveur si ok
     if (firstName(contact.firstName) && lastName(contact.lastName) && address(contact.address) && city(contact.city) && email(contact.email)) {
@@ -162,7 +181,7 @@ validate.addEventListener('click', (event) => {
         sendToServer(contact, cart.map(product => product.id))
     }
     else {
-        alert("Le formulaire de contact comporte des erreurs de format, veuillez corriger svp")
+        alert('Le formulaire de contact comporte des erreurs de format, veuillez corriger svp')
     }
 })
 

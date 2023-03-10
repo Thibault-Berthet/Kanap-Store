@@ -73,6 +73,9 @@
 .item__content__settings__quantity input:focus {
 	outline: none;
 }
+.item__content__settings__quantity p {
+	color: #fbbcbc;
+}
 .item__content__addButton {
 	display: flex;
 	justify-content: center;

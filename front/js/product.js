@@ -30,7 +30,16 @@ panier.addEventListener('click', () => {
     // Récupération des informations sélectionné
     let id = urlSearchParams.get('id')
     let color = document.querySelector('#colors').value
-    let nber = parseInt(document.querySelector('#quantity').value)
+    let nber = parseFloat(document.querySelector('#quantity').value)
+
+    // Vérifie que le nombre entré soit bien compris entre 1 et 100
+    if (nber < 1 || nber > 100 || !Number.isInteger(nber)){
+        document.querySelector('#itemQuantityErrorMsg').textContent = '* Veuillez entrer un nombre entier compris entre 1 et 100 svp. *'
+        return false
+    }
+    else{
+        document.querySelector('#itemQuantityErrorMsg').textContent = ''
+    }
 
     // Création de l'objet avec les informations
     let choixCanap = {id,color,nber}
