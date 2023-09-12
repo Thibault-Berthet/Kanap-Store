@@ -24,20 +24,28 @@ Bonne journée, soirée à vous,
 
 Thibault
 
-Hi,
-
-This is the fourth project that i did as part of my training to become web developer. The project was about learning and using JavaScript.
-
-***
-To launch the project you will need to have "Node" and "npm" installed locally on your machine, then :
-* Clone the repo and from the "back" folder of the project run "npm install"
-* All the "node_modules" necessary will be installed
-* Run "node server" and the server should start on "localhost" with default port "3000"
-* If the server runs on another port for any reason, this is printed to the console when the server starts : "Listening on port 3001"
 ***
 
-If you watch it, first of all thank you ! And feel free to contact me about some part of the code ;)
+Good morning, good evening,
 
-I wish you a nice day or evening,
+Welcome to the front-end code of the Kanap sofa store site, I was able to write the JavaScript necessary for the dynamism of the site.
+
+The site allows you to choose your sofa, add it to the cart, modify your cart and order, with JavaScript.
+
+Information about the sofas is received via an API with which the site communicates.
+
+To view the project you will need to do several actions on your machine, here is the list:
+* Firstly Node.js must be installed on your computer, you can get it here ==> https://nodejs.org/fr
+* Then clone the repo and from your console you place yourself in the "back" folder and you write "npm install"
+* All necessary "node_modules" will be installed
+* From the console write "node server" and the server should start as "localhost" with default port "3000"
+* If the server is launched on another port this will be written on the console
+* Once the server is activated you can launch the live server via your development environment
+
+The aim of the site is to show the possibilities of interaction with an API and on the different elements of the site with JavaScript.
+
+If you have any questions or comments about the code, don't hesitate!
+
+Good day, evening to you,
 
 Thibault
