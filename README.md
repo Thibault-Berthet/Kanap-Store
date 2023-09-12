@@ -2,7 +2,7 @@
 
 Bonjour, Bonsoir,
 
-Bienvenue sur le code front-end du site du magasin de canapé Kanap, j'ai pu écrire le JavaScript nécessaire au dynamisme du site.
+Bienvenue sur le code du site du magasin de canapé Kanap, j'ai pu écrire le JavaScript nécessaire au dynamisme du site.
 
 Le site permet de choisir son canapé, l'ajouter au panier, modifier son panier et passer la commande, le tout grace au JavaScript.
 
@@ -28,7 +28,7 @@ Thibault
 
 Good morning, good evening,
 
-Welcome to the front-end code of the Kanap sofa store site, I was able to write the JavaScript necessary for the dynamism of the site.
+Welcome to the code of the Kanap sofa store site, I was able to write the JavaScript necessary for the dynamism of the site.
 
 The site allows you to choose your sofa, add it to the cart, modify your cart and order, with JavaScript.
 
